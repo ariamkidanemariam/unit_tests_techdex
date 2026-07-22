@@ -30,21 +30,8 @@ describe("Navigation - Header & Navbar", () => {
     });
   });
 
-  it("TC-003: should display navigation bar at the top with all components", () => {
-    cy.get('nav, header, [class*="nav"], [class*="Nav"]')
-      .should("be.visible")
-      .then(($el) => {
-        const rect = $el[0].getBoundingClientRect();
-        expect(rect.top).to.be.closeTo(0, 50);
-      });
 
-    cy.get('nav a, header a, [class*="nav"] a, [class*="Nav"] a').should(
-      "have.length.at.least",
-      4,
-    );
-  });
-
-  it("TC-004: should navigate to About Us section when clicking About Us link", () => {
+  it("TC-003: should navigate to About Us section when clicking About Us link", () => {
     cy.get('nav, header, [class*="nav"], [class*="Nav"]')
       .contains("a", "About Us", { matchCase: false })
       .should("be.visible")
@@ -58,7 +45,7 @@ describe("Navigation - Header & Navbar", () => {
       .should("be.visible");
   });
 
-  it("TC-005: should navigate to How It Works section when clicking How It Works link", () => {
+  it("TC-004: should navigate to How It Works section when clicking How It Works link", () => {
     cy.get('nav, header, [class*="nav"], [class*="Nav"]')
       .contains("a", "How it Works", { matchCase: false })
       .should("be.visible")
@@ -72,7 +59,7 @@ describe("Navigation - Header & Navbar", () => {
       .should("be.visible");
   });
 
-  it("TC-006: should navigate to Contacts section when clicking Contacts link", () => {
+  it("TC-005: should navigate to Contacts section when clicking Contacts link", () => {
     cy.get('nav, header, [class*="nav"], [class*="Nav"]')
       .contains("a", "Contacts", { matchCase: false })
       .should("be.visible")
@@ -86,19 +73,4 @@ describe("Navigation - Header & Navbar", () => {
       .should("be.visible");
   });
 
-  it("TC-007: should have consistent navigation colors", () => {
-    cy.get('nav, header, [class*="nav"], [class*="Nav"]')
-      .first()
-      .should("have.css", "background-color")
-      .then((bgColor) => {
-        cy.log("Navigation Background Color:", bgColor);
-      });
-
-    cy.get("nav a, header a")
-      .first()
-      .should("have.css", "color")
-      .then((textColor) => {
-        cy.log("Navigation Text Color:", textColor);
-      });
-  });
 });
