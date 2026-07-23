@@ -30,7 +30,6 @@ describe("Navigation - Header & Navbar", () => {
     });
   });
 
-
   it("TC-003: should navigate to About Us section when clicking About Us link", () => {
     cy.get('nav, header, [class*="nav"], [class*="Nav"]')
       .contains("a", "About Us", { matchCase: false })
@@ -72,5 +71,4 @@ describe("Navigation - Header & Navbar", () => {
       .contains("Contact", { matchCase: false })
       .should("be.visible");
   });
-
 });

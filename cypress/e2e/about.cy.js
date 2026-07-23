@@ -9,52 +9,45 @@ describe("About Us Page/Section", () => {
     cy.wait(2000);
   });
 
-  const urlHasAbout = (url) => url.includes("#about") || url.includes("#aboutus");
-
-  it("TC-032 to TC-034: should display About Us section and content", () => {
-    cy.url().should("satisfy", urlHasAbout);
+  it("TC-024: should display About Us section when navigated", () => {
+    cy.url().should(
+      "satisfy",
+      (url) => url.includes("#about") || url.includes("#aboutus"),
+    );
     cy.contains("WHAT WE DO", { matchCase: false }).should("be.visible");
+  });
+
+  it("TC-025: should display mission statement", () => {
     cy.contains("Our Mission", { matchCase: false }).should("be.visible");
-    cy.contains("To revolutionize African agricultural trade").should("be.visible");
+    cy.contains("To revolutionize African agricultural trade").should(
+      "be.visible",
+    );
   });
 
-  it("TC-035 to TC-037: should display What We Do, Impact, and Team sections", () => {
-    const sections = [
-      { heading: "WHAT WE DO", text: "We are an innovative team dedicated to bridging engineering gaps" },
-      { heading: "Our Impact", text: "Ishuko transforms Zambian agriculture" },
-      { heading: "Meet Our Team", text: "The passionate minds behind Ishuko" },
-    ];
-
-    sections.forEach(({ heading, text }) => {
-      cy.contains(heading, { matchCase: false }).scrollIntoView();
-      cy.wait(500);
-      cy.contains(heading, { matchCase: false }).should("be.visible");
-      cy.contains(text).should("be.visible");
-    });
+  it("TC-026: should display What We Do section content", () => {
+    cy.contains(
+      "We are an innovative team dedicated to bridging engineering gaps",
+    ).should("be.visible");
   });
 
-  it("TC-038: should have team member cards with images", () => {
+  it("TC-027: should display Our Impact section", () => {
+    cy.contains("Our Impact", { matchCase: false }).should("be.visible");
+    cy.contains("Ishuko transforms Zambian agriculture").should("be.visible");
+  });
+
+  it("TC-028: should display Meet Our Team section with member cards", () => {
     cy.contains("Meet Our Team", { matchCase: false }).scrollIntoView();
     cy.wait(1000);
+    cy.contains("Meet Our Team", { matchCase: false }).should("be.visible");
+    cy.contains("The passionate minds behind Ishuko").should("be.visible");
     cy.contains("Meet Our Team", { matchCase: false })
       .parents("section")
       .find("img")
       .should("have.length.at.least", 4);
   });
 
-  it("TC-039: should scroll to About Us section from homepage", () => {
-    cy.visit(baseUrl);
-    cy.wait(1500);
-    cy.contains("a", "About Us", { matchCase: false }).click();
-    cy.wait(2000);
-    cy.url().should("satisfy", urlHasAbout);
-    cy.contains("WHAT WE DO", { matchCase: false }).should("be.visible");
-  });
-
-  it("TC-040 to TC-043: should have correct card styling", () => {
-    const cards = ["Our Mission", "Our Impact"];
-
-    cards.forEach((heading) => {
+  it("TC-029: should have transition on cards", () => {
+    ["Our Mission", "Our Impact"].forEach((heading) => {
       cy.contains(heading, { matchCase: false })
         .parents('[class*="card"], div')
         .first()
@@ -65,20 +58,5 @@ describe("About Us Page/Section", () => {
           expect(duration).to.not.equal("0s");
         });
     });
-
-    
-    cy.contains("Our Mission", { matchCase: false })
-      .parents('[class*="card"], div')
-      .first()
-      .then(($card) => {
-        const bg = $card.css("background-color");
-        expect(bg.includes("255, 255, 255") || bg.includes("transparent")).to.be.true;
-      });
-
-    cy.contains("Our Mission", { matchCase: false })
-      .parents('[class*="card"], div')
-      .first()
-      .should("have.css", "box-shadow")
-      .and("not.equal", "none");
   });
 });

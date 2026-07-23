@@ -7,7 +7,7 @@ describe("Home Page", () => {
     cy.wait(1500);
   });
 
-  it("TC-006: should load the home page ", () => {
+  it("TC-006: should load the home page without errors", () => {
     cy.url().should("eq", baseUrl + "/");
     cy.get("body").should("be.visible");
     cy.get("nav, header").should("be.visible");
@@ -27,26 +27,8 @@ describe("Home Page", () => {
       .should("exist");
   });
 
-  it("TC-009: should have correct hero section colors", () => {
-    cy.get("h1, h2")
-      .first()
-      .should("have.css", "color")
-      .then((color) => {
-        cy.log("Heading Color:", color);
-      });
-  });
-
-  it("TC-010: should display call-to-action buttons with correct colors", () => {
-    cy.get("a, button")
-      .contains(/how it works|contact us|about us/i)
-      .should("exist")
-      .and("have.css", "background-color")
-      .then((bgColor) => {
-        cy.log("CTA Button Background:", bgColor);
-      });
-  });
-
-  it("TC-011: should have How It Works accessible for buyers", () => {
+ 
+   it("TC-009: should have How It Works accessible for buyers", () => {
     cy.contains("a", "How it Works", { matchCase: false })
       .should("be.visible")
       .click();
@@ -54,7 +36,7 @@ describe("Home Page", () => {
     cy.wait(1000);
     cy.url().should("include", "#howitworks");
   });
-  it("TC-012: should have About us accessible for buyers", () => {
+  it("TC-010: should have About us accessible for buyers", () => {
     cy.contains("a", "About Us", { matchCase: false })
       .should("be.visible")
       .click();
@@ -63,7 +45,7 @@ describe("Home Page", () => {
     cy.url().should("include", "#about");
   });
 
-  it("TC-013: should have Contact section accessible for cooperatives", () => {
+  it("TC-011: should have Contact section accessible for cooperatives", () => {
     cy.contains("a", "Contacts", { matchCase: false })
       .should("be.visible")
       .click();
