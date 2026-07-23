@@ -27,8 +27,7 @@ describe("Home Page", () => {
       .should("exist");
   });
 
- 
-   it("TC-009: should have How It Works accessible for buyers", () => {
+  it("TC-009: should have How It Works accessible for buyers", () => {
     cy.contains("a", "How it Works", { matchCase: false })
       .should("be.visible")
       .click();

@@ -4,7 +4,7 @@ describe("Contacts Page - Edge Cases", () => {
   beforeEach(() => {
     cy.visit(baseUrl);
     cy.viewport(1280, 720);
-    cy.wait(3000); 
+    cy.wait(3000);
     cy.contains("a", "Contacts", { matchCase: false }).click();
     cy.wait(3000);
   });
@@ -18,7 +18,6 @@ describe("Contacts Page - Edge Cases", () => {
     });
   };
 
- 
   it("TC-030: should block empty form submission", () => {
     safeFill();
     cy.get("input").should("have.length.at.least", 1);
@@ -64,7 +63,7 @@ describe("Contacts Page - Edge Cases", () => {
     });
   });
 
-   it("TC-033: should reject invalid email format", () => {
+  it("TC-033: should reject invalid email format", () => {
     safeFill();
     cy.get("input").eq(0).type("Example", { force: true });
     cy.get("input").eq(1).type("User", { force: true });

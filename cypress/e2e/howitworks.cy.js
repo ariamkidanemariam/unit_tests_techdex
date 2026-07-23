@@ -68,15 +68,17 @@ describe("How It Works Page", () => {
   });
 
   it("TC-021: should have hover transition effect on all step cards", () => {
-  cy.get('[class*="ishukoStepCard"]').should("have.length.at.least", 5).each(($card) => {
-    const prop = $card.css("transition-property");
-    const duration = $card.css("transition-duration");
-    expect(prop === "all" || prop.includes("transform")).to.be.true;
-    expect(duration).to.not.equal("0s");
+    cy.get('[class*="ishukoStepCard"]')
+      .should("have.length.at.least", 5)
+      .each(($card) => {
+        const prop = $card.css("transition-property");
+        const duration = $card.css("transition-duration");
+        expect(prop === "all" || prop.includes("transform")).to.be.true;
+        expect(duration).to.not.equal("0s");
+      });
   });
-});
 
-   it("TC-022: should verify all step numbers are visible", () => {
+  it("TC-022: should verify all step numbers are visible", () => {
     cy.get('[class*="ishukoBadge"], [class*="badge"]').then(($badges) => {
       expect($badges.length).to.be.at.least(5);
       const numbers = [];
